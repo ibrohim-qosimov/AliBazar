@@ -1,4 +1,6 @@
-﻿using AliBazar.Infrastructure.Persistance;
+﻿using AliBazar.Application.Abstractions;
+using AliBazar.Infrastructure.Persistance;
+using AliBazar.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,9 +13,11 @@ public static class AliBazarInfrastructureDependencyInjection
     {
         services.AddDbContext<AliBazarDbContext>(db =>
         {
-            db.UseNpgsql("connectionString: ");
+            db.UseNpgsql(configuration.GetConnectionString("Db"));
         });
 
+        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<ICateogryRepository, CateogryRepository>();
         return services;
     }
 }

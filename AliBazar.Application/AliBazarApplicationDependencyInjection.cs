@@ -1,4 +1,5 @@
-﻿using AliBazar.Application.Services.GeneratingJWT;
+﻿using AliBazar.Application.Services.CategoryServices;
+using AliBazar.Application.Services.GeneratingJWT;
 using AliBazar.Application.Services.PasswrodHashing;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -10,6 +11,7 @@ namespace AliBazar.Application
         {
             services.AddScoped<IPasswordHasher, PasswordHasher>();
             services.AddScoped<IJwtService, JwtService>();
+            services.AddScoped<ICategoryService, CategoryService>();
             return services;
         }
     }
