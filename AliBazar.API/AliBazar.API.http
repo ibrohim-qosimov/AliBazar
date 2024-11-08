@@ -1,0 +1,6 @@
+@AliBazar.API_HostAddress = http://localhost:5030
+
+GET {{AliBazar.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
