@@ -1,6 +1,6 @@
 ﻿namespace AliBazar.Application.Services.PasswrodHashing;
 
-internal class PasswordHasher : IPasswordHasher
+public class PasswordHasher : IPasswordHasher
 {
     public string Hash(string password)
     {
