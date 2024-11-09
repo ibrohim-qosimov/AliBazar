@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace AliBazar.Infrastructure.Migrations
 {
     [DbContext(typeof(AliBazarDbContext))]
-    [Migration("20241108201428_test")]
+    [Migration("20241109071711_test")]
     partial class test
     {
         /// <inheritdoc />
@@ -53,7 +53,7 @@ namespace AliBazar.Infrastructure.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<DateTimeOffset>("OrderDate")
+                    b.Property<DateTimeOffset?>("OrderDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Status")

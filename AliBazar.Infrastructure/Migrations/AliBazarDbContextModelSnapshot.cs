@@ -50,7 +50,7 @@ namespace AliBazar.Infrastructure.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<DateTimeOffset>("OrderDate")
+                    b.Property<DateTimeOffset?>("OrderDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Status")
