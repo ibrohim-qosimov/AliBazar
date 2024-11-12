@@ -14,10 +14,10 @@ jobs:
       - name: Repositoryni klonlash
         uses: actions/checkout@v2
 
-      - name: .NET SDK o‘rnatish
-        uses: actions/setup-dotnet@v2
-        with:
-          dotnet-version: '8.0.0' # O'zingiz ishlatayotgan .NET versiyasiga moslang
+      # - name: .NET SDK o‘rnatish
+        # uses: actions/setup-dotnet@v2
+        # with:
+          # dotnet-version: '8.0.0' # O'zingiz ishlatayotgan .NET versiyasiga moslang
 
       - name: Asosiy paketlarni tiklash
         run: dotnet restore
