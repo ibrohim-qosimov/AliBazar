@@ -35,7 +35,7 @@ public class Program
             app.UseSwagger();
             app.UseSwaggerUI();
         }
-
+        //s
         app.UseHttpsRedirection();
 
         app.UseCors();
