@@ -9,6 +9,6 @@ public class OrderItem
     public required decimal Price { get; set; } // Mahsulotning buyurtma paytidagi narxi
 
     // Order va Product bilan bog'lanish
-    public required Order Order { get; set; }
-    public required Product Product { get; set; }
+    public Order Order { get; set; }
+    public Product Product { get; set; }
 }

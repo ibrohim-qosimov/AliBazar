@@ -16,9 +16,9 @@ public class JwtService : IJwtService
     public JwtService(IConfiguration configuration)
     {
         _configuration = configuration;
-        _secretKey = "";
-        _issuer = "";
-        _audience = "";
+        _secretKey = configuration[key: "JWTSettings:Secret"]!;
+        _issuer = configuration[key: "JWTSettings:ValidIssuer"]!;
+        _audience = configuration[key: "JWTSettings:ValidAudence"]!;
     }
 
 

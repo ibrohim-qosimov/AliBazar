@@ -1,8 +1,6 @@
 ﻿using AliBazar.Application.Abstractions;
-using AliBazar.Application.Services.CategoryServices;
 using AliBazar.Application.Services.PasswrodHashing;
 using AliBazar.Application.ViewModels;
-using AliBazar.Domain.DTOs;
 using AliBazar.Domain.Entities;
 using AliBazar.Domain.ViewModels;
 using Microsoft.AspNetCore.Hosting;
@@ -23,13 +21,17 @@ namespace AliBazar.Application.Services.UserServices
             _passwordHasher = passwordHasher;
         }
 
-        public async Task<ResponseModel> CreateUser(RegisterDTO userDTO)
+        public async Task<ResponseModel> CreateUser(CreateUserDTO userDTO)
         {
+            var salt = Guid.NewGuid().ToString();
+            var passwordHash = _passwordHasher.Hash(userDTO.Password, salt);
+
             var user = new User()
             {
                 Name = userDTO.Name,
-                Password = _passwordHasher.Hash(userDTO.Password),
+                Password = passwordHash,
                 PhoneNumber = userDTO.PhoneNumber,
+                Salt = salt,
                 Role = "User"
             };
 
@@ -39,14 +41,14 @@ namespace AliBazar.Application.Services.UserServices
             {
                 return new ResponseModel()
                 {
-                    ErrorNote = "Error",
+                    Note = "Error",
                     IsSuccess = false
                 };
             }
 
             return new ResponseModel()
             {
-                ErrorNote = "Successful Created User",
+                Note = "Successful Created User",
                 IsSuccess = true
             };
         }
@@ -69,6 +71,12 @@ namespace AliBazar.Application.Services.UserServices
             return userResult;
         }
 
+        public async Task<User> GetUserByPhoneNumber(string phoneNumber)
+        {
+            var result = await _userRepository.GetByAny(x => x.PhoneNumber == phoneNumber);
+            return result;
+        }
+
         public async Task<ResponseModel> UpdateUserById(long id, UserUpdateDTO userDTO)
         {
 
@@ -79,7 +87,7 @@ namespace AliBazar.Application.Services.UserServices
                 return new ResponseModel()
                 {
                     IsSuccess = false,
-                    ErrorNote = "User not found!"
+                    Note = "User not found!"
                 };
             }
 
@@ -106,15 +114,17 @@ namespace AliBazar.Application.Services.UserServices
             {
                 return new ResponseModel()
                 {
-                    ErrorNote = "Exception while saving picture.",
+                    Note = "Exception while saving picture.",
                     IsSuccess = false
                 };
             }
 
+            var salt = Guid.NewGuid().ToString();
 
             user.Name = userDTO.Name;
             user.PhoneNumber = userDTO.PhoneNumber;
-            user.Password = _passwordHasher.Hash(userDTO.Password);
+            user.Salt = salt;
+            user.Password = _passwordHasher.Hash(userDTO.Password, salt);
             user.ImageUrl = "/UserPhotos/" + fileName;
 
             var result = await _userRepository.Update(user);
@@ -123,14 +133,14 @@ namespace AliBazar.Application.Services.UserServices
             {
                 return new ResponseModel()
                 {
-                    ErrorNote = "Exception while saving picture.",
+                    Note = "Exception while saving picture.",
                     IsSuccess = false
                 };
             }
 
             return new ResponseModel()
             {
-                ErrorNote = "User updated successfully!",
+                Note = "User updated successfully!",
                 IsSuccess = true
             };
         }

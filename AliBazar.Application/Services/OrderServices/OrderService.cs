@@ -29,14 +29,14 @@ namespace AliBazar.Application.Services.OrderServices
             {
                 return new ResponseModel()
                 {
-                    ErrorNote = "Exception while saving order.",
+                    Note = "Exception while saving order.",
                     IsSuccess = false
                 };
             }
 
             return new ResponseModel()
             {
-                ErrorNote = "Category created successfully!",
+                Note = "Category created successfully!",
                 IsSuccess = true
             };
         }
@@ -68,7 +68,7 @@ namespace AliBazar.Application.Services.OrderServices
                 return new ResponseModel()
                 {
                     IsSuccess = false,
-                    ErrorNote = "Order not found!"
+                    Note = "Order not found!"
                 };
             }
 
@@ -80,7 +80,7 @@ namespace AliBazar.Application.Services.OrderServices
             return new ResponseModel()
             {
                 IsSuccess = true,
-                ErrorNote = "Order updated successfuly!"
+                Note = "Order updated successfuly!"
             };
         }
     }

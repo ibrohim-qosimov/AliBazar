@@ -20,6 +20,7 @@ public static class AliBazarInfrastructureDependencyInjection
         services.AddScoped<ICateogryRepository, CateogryRepository>();
         services.AddScoped<IOrderRepository, OrderRepository>();
         services.AddScoped<IProductRepository, ProductRepository>();
+        services.AddScoped<IOrderItemRepository, OrderItemRepository>();
         return services;
     }
 }

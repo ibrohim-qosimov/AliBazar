@@ -19,7 +19,7 @@ namespace AliBazar.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register(RegisterDTO userDTO)
+        public async Task<IActionResult> CreateUser(CreateUserDTO userDTO)
         {
             var result = await _userService.CreateUser(userDTO);
             return Ok(result);

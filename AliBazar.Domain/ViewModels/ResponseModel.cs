@@ -7,6 +7,6 @@ public class ResponseModel
     [JsonPropertyName("is_success")]
     public bool IsSuccess { get; set; }
 
-    [JsonPropertyName("error_note")]
-    public string? ErrorNote { get; set; }
+    [JsonPropertyName("note")]
+    public string? Note { get; set; }
 }

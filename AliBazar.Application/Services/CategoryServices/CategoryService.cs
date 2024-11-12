@@ -43,7 +43,7 @@ namespace AliBazar.Application.Services.CategoryServices
             {
                 return new ResponseModel()
                 {
-                    ErrorNote = "Exception while saving picture.",
+                    Note = "Exception while saving picture.",
                     IsSuccess = false
                 };
             }
@@ -60,14 +60,14 @@ namespace AliBazar.Application.Services.CategoryServices
             {
                 return new ResponseModel()
                 {
-                    ErrorNote = "Exception while saving picture.",
+                    Note = "Exception while saving picture.",
                     IsSuccess = false
                 };
             }
 
             return new ResponseModel()
             {
-                ErrorNote = "Category created successfully!",
+                Note = "Category created successfully!",
                 IsSuccess = true
             };
         }
@@ -100,7 +100,7 @@ namespace AliBazar.Application.Services.CategoryServices
                 return new ResponseModel()
                 {
                     IsSuccess = false,
-                    ErrorNote = "Category not found!"
+                    Note = "Category not found!"
                 };
             }
 
@@ -127,7 +127,7 @@ namespace AliBazar.Application.Services.CategoryServices
             {
                 return new ResponseModel()
                 {
-                    ErrorNote = "Exception while saving picture.",
+                    Note = "Exception while saving picture.",
                     IsSuccess = false
                 };
             }
@@ -142,14 +142,14 @@ namespace AliBazar.Application.Services.CategoryServices
             {
                 return new ResponseModel()
                 {
-                    ErrorNote = "Exception while saving picture.",
+                    Note = "Exception while saving picture.",
                     IsSuccess = false
                 };
             }
 
             return new ResponseModel()
             {
-                ErrorNote = "Category updated successfully!",
+                Note = "Category updated successfully!",
                 IsSuccess = true
             };
         }

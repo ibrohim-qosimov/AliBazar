@@ -51,7 +51,7 @@ namespace AliBazar.Application.Services.ProductServices
             {
                 return new ResponseModel()
                 {
-                    ErrorNote = "Exception while saving picture.",
+                    Note = "Exception while saving picture.",
                     IsSuccess = false
                 };
             }
@@ -71,14 +71,14 @@ namespace AliBazar.Application.Services.ProductServices
             {
                 return new ResponseModel()
                 {
-                    ErrorNote = "Exception while saving picture.",
+                    Note = "Exception while saving picture.",
                     IsSuccess = false
                 };
             }
 
             return new ResponseModel()
             {
-                ErrorNote = "Product created successfully!",
+                Note = "Product created successfully!",
                 IsSuccess = true
             };
         }
@@ -111,7 +111,7 @@ namespace AliBazar.Application.Services.ProductServices
                 return new ResponseModel()
                 {
                     IsSuccess = false,
-                    ErrorNote = "Product not found!"
+                    Note = "Product not found!"
                 };
             }
 
@@ -138,7 +138,7 @@ namespace AliBazar.Application.Services.ProductServices
             {
                 return new ResponseModel()
                 {
-                    ErrorNote = "Exception while saving picture.",
+                    Note = "Exception while saving picture.",
                     IsSuccess = false
                 };
             }
@@ -156,14 +156,14 @@ namespace AliBazar.Application.Services.ProductServices
             {
                 return new ResponseModel()
                 {
-                    ErrorNote = "Exception while saving picture.",
+                    Note = "Exception while saving picture.",
                     IsSuccess = false
                 };
             }
 
             return new ResponseModel()
             {
-                ErrorNote = "Product updated successfully!",
+                Note = "Product updated successfully!",
                 IsSuccess = true
             };
         }
