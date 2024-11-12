@@ -13,6 +13,13 @@ public class Program
         builder.Services.AddAliBazarInfrastructureDependencyInjection(builder.Configuration);
         builder.Services.AddAliBazarApplicationDependencyInjection();
 
+        builder.Services.AddCors(ops =>
+        {
+            ops.AddDefaultPolicy(policy =>
+            {
+                policy.AllowAnyMethod().AllowAnyOrigin().AllowAnyHeader();
+            });
+        });
 
         builder.Services.AddControllers();
         builder.Services.AddEndpointsApiExplorer();
@@ -30,6 +37,8 @@ public class Program
         }
 
         app.UseHttpsRedirection();
+
+        app.UseCors();
 
         app.UseAuthorization();
 
