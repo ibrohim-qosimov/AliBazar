@@ -33,7 +33,11 @@ namespace AliBazar.Infrastructure.Migrations
                     b.Property<string>("ImageUrl")
                         .HasColumnType("text");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("NameRuss")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("NameUz")
                         .IsRequired()
                         .HasColumnType("text");
 

@@ -3,6 +3,7 @@ using AliBazar.Application.ViewModels;
 using AliBazar.Domain.Entities;
 using AliBazar.Domain.ViewModels;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using System.Diagnostics;
 
 namespace AliBazar.Application.Services.CategoryServices
@@ -20,28 +21,11 @@ namespace AliBazar.Application.Services.CategoryServices
 
         public async Task<ResponseModel> CreateCategory(CategoryDTO categoryDTO)
         {
-            var file = categoryDTO.ImageUrl;
-            string filePath = Path.Combine(_webHostEnvironment.WebRootPath, "CategoryPhotos");
-            string fileName = "";
+            var fileName = await SaveFileAsync(categoryDTO.Image);
 
-            try
+            if (fileName == null)
             {
-                if (!Directory.Exists(filePath))
-                {
-                    Directory.CreateDirectory(filePath);
-                    Debug.WriteLine("Directory created successfully.");
-                }
-
-                fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-                filePath = Path.Combine(_webHostEnvironment.WebRootPath, "CategoryPhotos", fileName);
-                using (var stream = new FileStream(filePath, FileMode.Create))
-                {
-                    await file.CopyToAsync(stream);
-                }
-            }
-            catch (Exception ex)
-            {
-                return new ResponseModel()
+                return new ResponseModel
                 {
                     Note = "Exception while saving picture.",
                     IsSuccess = false
@@ -50,7 +34,8 @@ namespace AliBazar.Application.Services.CategoryServices
 
             var cateogry = new Category()
             {
-                Name = categoryDTO.Name,
+                NameUz = categoryDTO.NameUz,
+                NameRuss = categoryDTO.NameRuss,
                 ImageUrl = "/CategoryPhotos/" + fileName
             };
 
@@ -90,6 +75,56 @@ namespace AliBazar.Application.Services.CategoryServices
             return categoryResult;
         }
 
+        public async Task<IEnumerable<CategoryViewModel>> GetAllUz()
+        {
+            var categories = await _cateogryRepository.GetAll();
+            var result = categories.Select(c => new CategoryViewModel
+            {
+                Id = c.Id,
+                Name = c.NameUz,
+                ImageUrl = c.ImageUrl
+            });
+
+            return result;
+        }
+
+        public async Task<IEnumerable<CategoryViewModel>> GetAllRu()
+        {
+            var categories = await _cateogryRepository.GetAll();
+            var result = categories.Select(c => new CategoryViewModel
+            {
+                Id = c.Id,
+                Name = c.NameRuss,
+                ImageUrl = c.ImageUrl
+            });
+
+            return result;
+        }
+
+        public async Task<CategoryViewModel> GetCategoryByIdRu(long id)
+        {
+            var categoryResult = await _cateogryRepository.GetByAny(x => x.Id == id);
+
+            return new CategoryViewModel()
+            {
+                Id= categoryResult.Id,
+                Name = categoryResult.NameRuss,
+                ImageUrl = categoryResult.ImageUrl
+            };
+        }
+
+        public async Task<CategoryViewModel> GetCategoryByIdUz(long id)
+        {
+            var categoryResult = await _cateogryRepository.GetByAny(x => x.Id == id);
+
+            return new CategoryViewModel()
+            {
+                Id = categoryResult.Id,
+                Name = categoryResult.NameUz,
+                ImageUrl = categoryResult.ImageUrl
+            };
+        }
+
         public async Task<ResponseModel> UpdateCategoryById(long id, CategoryDTO categoryDTO)
         {
 
@@ -104,36 +139,19 @@ namespace AliBazar.Application.Services.CategoryServices
                 };
             }
 
-            var file = categoryDTO.ImageUrl;
-            string filePath = Path.Combine(_webHostEnvironment.WebRootPath, "CategoryPhotos");
-            string fileName = "";
+            var fileName = await SaveFileAsync(categoryDTO.Image);
 
-            try
+            if (fileName == null)
             {
-                if (!Directory.Exists(filePath))
-                {
-                    Directory.CreateDirectory(filePath);
-                    Debug.WriteLine("Directory created successfully.");
-                }
-
-                fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-                filePath = Path.Combine(_webHostEnvironment.WebRootPath, "CategoryPhotos", fileName);
-                using (var stream = new FileStream(filePath, FileMode.Create))
-                {
-                    await file.CopyToAsync(stream);
-                }
-            }
-            catch (Exception ex)
-            {
-                return new ResponseModel()
+                return new ResponseModel
                 {
                     Note = "Exception while saving picture.",
                     IsSuccess = false
                 };
             }
 
-
-            category.Name = categoryDTO.Name;
+            category.NameUz = categoryDTO.NameUz;
+            category.NameRuss = categoryDTO.NameRuss;
             category.ImageUrl = "/CategoryPhotos/" + fileName;
 
             var result = await _cateogryRepository.Update(category);
@@ -152,6 +170,33 @@ namespace AliBazar.Application.Services.CategoryServices
                 Note = "Category updated successfully!",
                 IsSuccess = true
             };
+        }
+
+        private async Task<string> SaveFileAsync(IFormFile file)
+        {
+            if (file == null || file.Length == 0) return null;
+
+            string filePath = Path.Combine(_webHostEnvironment.WebRootPath, "CategoryPhotos");
+            if (!Directory.Exists(filePath))
+            {
+                Directory.CreateDirectory(filePath);
+            }
+
+            string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+            string fullPath = Path.Combine(filePath, fileName);
+
+            try
+            {
+                using (var stream = new FileStream(fullPath, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
+                return fileName;
+            }
+            catch
+            {
+                return null;
+            }
         }
     }
 }

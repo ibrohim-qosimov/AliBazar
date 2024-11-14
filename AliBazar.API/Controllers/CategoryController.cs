@@ -49,6 +49,46 @@ namespace AliBazar.API.Controllers
             return Ok(result);
         }
 
+        [HttpGet("byLanguage")]
+        public async Task<IActionResult> GetAllByLanguageAsync([FromHeader(Name = "Accept-Language")] string language = "uz")
+        {
+            IEnumerable<CategoryViewModel> result;
+            switch (language)
+            {
+                case "uz":
+                    result = await _categoryService.GetAllUz();
+                    break;
+
+                case "ru":
+                    result = await _categoryService.GetAllRu();
+                    break;
+
+                default:
+                    throw new Exception("Language not found");
+            }
+            return Ok(result);
+
+        }
+        [HttpGet("byLanguage/{id}")]
+        public async Task<IActionResult> GetByIdByLanguage(long id, [FromHeader(Name = "Accept-Language")] string language = "uz")
+        {
+            CategoryViewModel result;
+            switch (language)
+            {
+                case "uz":
+                    result = await _categoryService.GetCategoryByIdUz(id);
+                    break;
+
+                case "ru":
+                    result = await _categoryService.GetCategoryByIdRu(id);
+                    break;
+
+                default:
+                    throw new Exception("Language not found");
+            }
+            return Ok(result);
+        }
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> RemoveCategory(long id)
         {
