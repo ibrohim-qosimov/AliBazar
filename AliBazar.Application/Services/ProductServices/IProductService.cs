@@ -17,5 +17,9 @@ namespace AliBazar.Application.Services.ProductServices
         public Task<bool> DeleteProductById(long id);
         public Task<Product> GetProductById(long id);
         public Task<IEnumerable<Product>> GetAllProducts();
+        Task<IEnumerable<ProductViewModel>> GetAllUz();
+        Task<IEnumerable<ProductViewModel>> GetAllRu();
+        Task<ProductViewModel> GetProductByIdUz(long id);
+        Task<ProductViewModel> GetProductByIdRu(long id);
     }
 }
