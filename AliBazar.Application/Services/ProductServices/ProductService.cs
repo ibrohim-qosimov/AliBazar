@@ -1,17 +1,9 @@
 ﻿using AliBazar.Application.Abstractions;
-using AliBazar.Application.Services.CategoryServices;
 using AliBazar.Application.ViewModels;
 using AliBazar.Domain.Entities;
 using AliBazar.Domain.ViewModels;
 using Microsoft.AspNetCore.Hosting;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO.Pipelines;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace AliBazar.Application.Services.ProductServices
 {
@@ -59,6 +51,8 @@ namespace AliBazar.Application.Services.ProductServices
             var product = new Product()
             {
                 Name = productDTO.Name,
+                NameRuss = productDTO.NameRuss,
+                NameUz = productDTO.NameUz,
                 Description = productDTO.Description,
                 Price = productDTO.Price,
                 CategoryId = productDTO.CategoryId,
@@ -99,6 +93,31 @@ namespace AliBazar.Application.Services.ProductServices
         {
             var ProductResult = await _productRepository.GetByAny(x => x.Id == id);
             return ProductResult;
+        }
+
+
+        public async Task<IEnumerable<ProductViewModel>> GetAllUz()
+        {
+            var products = await _productRepository.GetAll();
+            var result = products.Select(c => new ProductViewModel
+            {
+                Id = c.Id,
+                Name = c.NameUz,
+                ImageUrl = c.ImageUrl
+            }); 
+            return result;
+        }
+
+        public async Task<IEnumerable<ProductViewModel>> GetAllRu()
+        {
+            var products = await _productRepository.GetAll();
+            var result = products.Select(c => new ProductViewModel
+            {
+                Id = c.Id,
+                Name = c.NameRuss,
+                ImageUrl = c.ImageUrl
+            });
+            return result;
         }
 
         public async Task<ResponseModel> UpdateProductById(long id, ProductDTO productDTO)
@@ -144,6 +163,8 @@ namespace AliBazar.Application.Services.ProductServices
             }
 
             product.Name = productDTO.Name;
+            product.NameUz = productDTO.NameUz;
+            product.NameRuss = productDTO.NameRuss;
             product.Description = productDTO.Description;
             product.Price = productDTO.Price;
             product.CategoryId = productDTO.CategoryId;
@@ -168,5 +189,31 @@ namespace AliBazar.Application.Services.ProductServices
             };
         }
 
+        public async Task<ProductViewModel> GetProductByIdUz(long id)
+        {
+
+            var product = await _productRepository.GetByAny(x => x.Id == id);
+
+            return new ProductViewModel()
+            {
+                Id = product.Id,
+                Name = product.NameUz,
+                ImageUrl = product.ImageUrl
+            };
+        }
+        
+        
+
+        public async Task<ProductViewModel> GetProductByIdRu(long id)
+        {
+            var product = await _productRepository.GetByAny(x => x.Id == id);
+
+            return new ProductViewModel()
+            {
+                Id = product.Id,
+                Name = product.NameRuss,
+                ImageUrl = product.ImageUrl
+            };
+        }
     }
 }

@@ -49,6 +49,44 @@ namespace AliBazar.API.Controllers
             return Ok(result);
         }
 
+
+        [HttpGet("byLanguage")]
+        public async Task<IActionResult> GetAllByLanguageAsync([FromHeader(Name = "Accept-Language")] string language = "uz")
+        {
+            IEnumerable<ProductViewModel> result;
+            switch (language)
+            {
+                case "uz":
+                    result = await _productService.GetAllUz();
+                    break;
+                case "ru":
+                    result = await _productService.GetAllRu();
+                    break;
+                default:
+                    throw new Exception("Language not found");
+            }
+            return Ok(result);
+        }
+        [HttpGet("byLanguage/{id}")]
+        public async Task<IActionResult> GetByIdByLanguage(long id, [FromHeader(Name = "Accept-Language")] string language = "uz")
+        {
+            ProductViewModel result;
+            switch (language)
+            {
+                case "uz":
+                    result = await _productService.GetProductByIdUz(id);
+                    break;
+                case "ru":
+                    result = await _productService.GetProductByIdRu(id);
+                    break;
+                default:
+                    throw new Exception("Language not found");
+            }
+            return Ok(result);
+        }
+
+
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> RemoveProduct(long id)
         {
@@ -63,3 +101,6 @@ namespace AliBazar.API.Controllers
         }
     }
 }
+
+
+
