@@ -126,6 +126,14 @@ namespace AliBazar.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("NameRuss")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("NameUz")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<decimal>("Price")
                         .HasColumnType("numeric");
 

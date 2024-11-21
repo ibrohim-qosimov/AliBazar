@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace AliBazar.Infrastructure.Migrations
 {
     [DbContext(typeof(AliBazarDbContext))]
-    [Migration("20241114023844_langmigration")]
-    partial class langmigration
+    [Migration("20241121094924_test")]
+    partial class test
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -126,6 +126,14 @@ namespace AliBazar.Infrastructure.Migrations
                         .HasColumnType("boolean");
 
                     b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("NameRuss")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("NameUz")
                         .IsRequired()
                         .HasColumnType("text");
 
