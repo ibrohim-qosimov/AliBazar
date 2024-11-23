@@ -102,6 +102,7 @@ namespace AliBazar.Application.Services.ProductServices
                 Id = c.Id,
                 Name = c.NameUz,
                 Description = c.DescriptionUz,
+                Price = c.Price,
                 ImageUrl = c.ImageUrl
             }); 
             return result;
@@ -116,6 +117,7 @@ namespace AliBazar.Application.Services.ProductServices
                 Id = c.Id,
                 Name = c.NameRuss,
                 Description = c.DescriptionRuss,
+                Price = c.Price,
                 ImageUrl = c.ImageUrl
             });
 
@@ -198,6 +200,7 @@ namespace AliBazar.Application.Services.ProductServices
                 Id = product.Id,
                 Name = product.NameUz,
                 Description = product.DescriptionUz,
+                Price = product.Price,
                 ImageUrl = product.ImageUrl
             };
         }
@@ -213,6 +216,7 @@ namespace AliBazar.Application.Services.ProductServices
                 Id = product.Id,
                 Name = product.NameRuss,
                 Description = product.DescriptionRuss,
+                Price = product.Price,
                 ImageUrl = product.ImageUrl
             };
         }
