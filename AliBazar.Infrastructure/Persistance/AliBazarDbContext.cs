@@ -16,4 +16,5 @@ public class AliBazarDbContext : DbContext
     public DbSet<Category> Categories { get; set; }
     public DbSet<Order> Orders { get; set; }
     public DbSet<OrderItem> OrdersItem { get; set; }
+    public DbSet<Comment> Comments { get; set; }
 }
