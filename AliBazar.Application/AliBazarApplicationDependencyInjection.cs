@@ -1,4 +1,5 @@
 ﻿using AliBazar.Application.Services.CategoryServices;
+using AliBazar.Application.Services.CommentServices;
 using AliBazar.Application.Services.GeneratingJWT;
 using AliBazar.Application.Services.OrderServices;
 using AliBazar.Application.Services.PasswrodHashing;
@@ -18,6 +19,7 @@ namespace AliBazar.Application
             services.AddScoped<IOrderService, OrderService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<ICommnetService, CommentService>();
             return services;
         }
     }
