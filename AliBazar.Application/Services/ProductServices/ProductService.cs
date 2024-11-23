@@ -3,6 +3,7 @@ using AliBazar.Application.ViewModels;
 using AliBazar.Domain.Entities;
 using AliBazar.Domain.ViewModels;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using System.Diagnostics;
 
 namespace AliBazar.Application.Services.ProductServices
@@ -20,43 +21,38 @@ namespace AliBazar.Application.Services.ProductServices
 
         public async Task<ResponseModel> CreateProduct(ProductDTO productDTO)
         {
-            var file = productDTO.ImageUrl;
-            string filePath = Path.Combine(_webHostEnvironment.WebRootPath, "ProductPhotos");
-            string fileName = "";
+            string productFolderPath = Path.Combine(_webHostEnvironment.WebRootPath, "ProductPhotos", Guid.NewGuid().ToString());
+            List<string> imageUrls = new List<string>();
 
             try
             {
-                if (!Directory.Exists(filePath))
+                foreach (var file in productDTO.ImageUrl)
                 {
-                    Directory.CreateDirectory(filePath);
-                    Debug.WriteLine("Product created successfully.");
-                }
-
-                fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-                filePath = Path.Combine(_webHostEnvironment.WebRootPath, "ProductPhotos", fileName);
-                using (var stream = new FileStream(filePath, FileMode.Create))
-                {
-                    await file.CopyToAsync(stream);
+                    var savedFilePath = await SaveFileAsync(file, productFolderPath);
+                    if (savedFilePath != null)
+                    {
+                        imageUrls.Add(savedFilePath);
+                    }
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 return new ResponseModel()
                 {
-                    Note = "Exception while saving picture.",
+                    Note = "Exception while saving pictures.",
                     IsSuccess = false
                 };
             }
 
             var product = new Product()
             {
-                Name = productDTO.Name,
                 NameRuss = productDTO.NameRuss,
                 NameUz = productDTO.NameUz,
-                Description = productDTO.Description,
+                DescriptionUz = productDTO.DescriptionUz,
+                DescriptionRuss = productDTO.DescriptionRuss,
                 Price = productDTO.Price,
                 CategoryId = productDTO.CategoryId,
-                ImageUrl = "/ProductPhotos/" + fileName
+                ImageUrl = imageUrls
             };
 
             var result = await _productRepository.Create(product);
@@ -65,7 +61,7 @@ namespace AliBazar.Application.Services.ProductServices
             {
                 return new ResponseModel()
                 {
-                    Note = "Exception while saving picture.",
+                    Note = "Exception while saving product.",
                     IsSuccess = false
                 };
             }
@@ -76,6 +72,7 @@ namespace AliBazar.Application.Services.ProductServices
                 IsSuccess = true
             };
         }
+
 
         public async Task<bool> DeleteProductById(long id)
         {
@@ -98,11 +95,13 @@ namespace AliBazar.Application.Services.ProductServices
 
         public async Task<IEnumerable<ProductViewModel>> GetAllUz()
         {
+         
             var products = await _productRepository.GetAll();
             var result = products.Select(c => new ProductViewModel
             {
                 Id = c.Id,
                 Name = c.NameUz,
+                Description = c.DescriptionUz,
                 ImageUrl = c.ImageUrl
             }); 
             return result;
@@ -111,18 +110,20 @@ namespace AliBazar.Application.Services.ProductServices
         public async Task<IEnumerable<ProductViewModel>> GetAllRu()
         {
             var products = await _productRepository.GetAll();
+
             var result = products.Select(c => new ProductViewModel
             {
                 Id = c.Id,
                 Name = c.NameRuss,
+                Description = c.DescriptionRuss,
                 ImageUrl = c.ImageUrl
             });
+
             return result;
         }
 
         public async Task<ResponseModel> UpdateProductById(long id, ProductDTO productDTO)
         {
-
             var product = await _productRepository.GetByAny(x => x.Id == id);
 
             if (product == null)
@@ -134,42 +135,39 @@ namespace AliBazar.Application.Services.ProductServices
                 };
             }
 
-            var file = productDTO.ImageUrl;
-            string filePath = Path.Combine(_webHostEnvironment.WebRootPath, "ProductPhotos");
-            string fileName = "";
+            string productFolderPath = Path.Combine(_webHostEnvironment.WebRootPath, "ProductPhotos", product.Id.ToString());
+            List<string> imageUrls = new List<string>();
 
             try
             {
-                if (!Directory.Exists(filePath))
+                if (productDTO.ImageUrl != null && productDTO.ImageUrl.Count > 0)
                 {
-                    Directory.CreateDirectory(filePath);
-                    Debug.WriteLine("Product created successfully.");
-                }
-
-                fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-                filePath = Path.Combine(_webHostEnvironment.WebRootPath, "ProductPhotos", fileName);
-                using (var stream = new FileStream(filePath, FileMode.Create))
-                {
-                    await file.CopyToAsync(stream);
+                    foreach (var file in productDTO.ImageUrl)
+                    {
+                        var savedFilePath = await SaveFileAsync(file, productFolderPath);
+                        if (savedFilePath != null)
+                        {
+                            imageUrls.Add(savedFilePath);
+                        }
+                    }
+                    product.ImageUrl = imageUrls;
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 return new ResponseModel()
                 {
-                    Note = "Exception while saving picture.",
+                    Note = "Exception while saving pictures.",
                     IsSuccess = false
                 };
             }
 
-            product.Name = productDTO.Name;
             product.NameUz = productDTO.NameUz;
             product.NameRuss = productDTO.NameRuss;
-            product.Description = productDTO.Description;
+            product.DescriptionUz = productDTO.DescriptionUz;
+            product.DescriptionRuss = productDTO.DescriptionRuss;
             product.Price = productDTO.Price;
             product.CategoryId = productDTO.CategoryId;
-            product.Name = productDTO.Name;
-            product.ImageUrl = "/ProductPhotos/" + fileName;
 
             var result = await _productRepository.Update(product);
 
@@ -177,7 +175,7 @@ namespace AliBazar.Application.Services.ProductServices
             {
                 return new ResponseModel()
                 {
-                    Note = "Exception while saving picture.",
+                    Note = "Exception while updating product.",
                     IsSuccess = false
                 };
             }
@@ -189,6 +187,7 @@ namespace AliBazar.Application.Services.ProductServices
             };
         }
 
+
         public async Task<ProductViewModel> GetProductByIdUz(long id)
         {
 
@@ -198,6 +197,7 @@ namespace AliBazar.Application.Services.ProductServices
             {
                 Id = product.Id,
                 Name = product.NameUz,
+                Description = product.DescriptionUz,
                 ImageUrl = product.ImageUrl
             };
         }
@@ -212,8 +212,35 @@ namespace AliBazar.Application.Services.ProductServices
             {
                 Id = product.Id,
                 Name = product.NameRuss,
+                Description = product.DescriptionRuss,
                 ImageUrl = product.ImageUrl
             };
+        }
+
+        private async Task<string> SaveFileAsync(IFormFile file, string productFolderPath)
+        {
+            if (file == null || file.Length == 0) return null;
+
+            if (!Directory.Exists(productFolderPath))
+            {
+                Directory.CreateDirectory(productFolderPath);
+            }
+
+            string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+            string fullPath = Path.Combine(productFolderPath, fileName);
+
+            try
+            {
+                using (var stream = new FileStream(fullPath, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
+                return $"/ProductPhotos/{Path.GetFileName(productFolderPath)}/{fileName}";
+            }
+            catch
+            {
+                return null;
+            }
         }
     }
 }

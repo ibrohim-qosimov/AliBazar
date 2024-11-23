@@ -4,7 +4,8 @@
     {
         public long Id { get; set; }
         public required string Name { get; set; }
-        public string? ImageUrl { get; set; }
+        public required string Description { get; set; }
+        public List<string>? ImageUrl { get; set; }
 
     }
 }

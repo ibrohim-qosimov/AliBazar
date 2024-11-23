@@ -67,6 +67,7 @@ namespace AliBazar.API.Controllers
             }
             return Ok(result);
         }
+
         [HttpGet("byLanguage/{id}")]
         public async Task<IActionResult> GetByIdByLanguage(long id, [FromHeader(Name = "Accept-Language")] string language = "uz")
         {

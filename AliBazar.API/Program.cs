@@ -40,6 +40,8 @@ public class Program
 
         app.UseCors();
 
+        app.UseStaticFiles();
+
         app.UseAuthorization();
 
 
