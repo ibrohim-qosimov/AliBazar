@@ -100,6 +100,13 @@ namespace AliBazar.API.Controllers
 
             return Ok(result);
         }
+
+        [HttpGet("search")]
+        public async Task<IActionResult> SearchProduct([FromQuery] string name)
+        {
+            var result = await _productService.SearchProduct(name);
+            return Ok(result);
+        }
     }
 }
 

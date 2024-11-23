@@ -15,5 +15,6 @@ namespace AliBazar.Application.Services.ProductServices
         Task<IEnumerable<ProductViewModel>> GetAllRu();
         Task<ProductViewModel> GetProductByIdUz(long id);
         Task<ProductViewModel> GetProductByIdRu(long id);
+        Task<IEnumerable<Product>> SearchProduct(string name);
     }
 }

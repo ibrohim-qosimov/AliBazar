@@ -242,5 +242,14 @@ namespace AliBazar.Application.Services.ProductServices
                 return null;
             }
         }
+
+        public async Task<IEnumerable<Product>> SearchProduct(string name)
+        {
+            var result = await _productRepository.GetAll();
+
+            var filteredResult = result.Where(c=>c.NameUz.Contains(name) || c.NameRuss.Contains(name));
+
+            return filteredResult;
+        }
     }
 }
