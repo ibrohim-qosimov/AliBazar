@@ -1,5 +1,7 @@
 using AliBazar.Infrastructure;
 using AliBazar.Application;
+using Serilog;
+using AliBazar.Application.Exceptions;
 namespace AliBazar.API;
 
 public class Program
@@ -21,9 +23,19 @@ public class Program
             });
         });
 
+
+
         builder.Services.AddControllers();
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
+
+        builder.Services.AddTransient<GlobalExceptionHandlerMiddlware>();
+
+
+
+
+
+
 
         var app = builder.Build();
 
@@ -36,6 +48,7 @@ public class Program
             app.UseSwaggerUI();
         }
         //s
+        app.UseMiddleware<GlobalExceptionHandlerMiddlware>();
         app.UseHttpsRedirection();
 
         app.UseCors();
@@ -43,6 +56,7 @@ public class Program
         app.UseStaticFiles();
 
         app.UseAuthorization();
+
 
 
         app.MapControllers();
