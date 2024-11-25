@@ -3,6 +3,7 @@ using AliBazar.Application.Services.ProductServices;
 using AliBazar.Application.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 
 namespace AliBazar.API.Controllers
 {
@@ -11,16 +12,20 @@ namespace AliBazar.API.Controllers
     public class ProductController : ControllerBase
     {
         private readonly IProductService _productService;
+     
 
         public ProductController(IProductService productService)
         {
             _productService = productService;
+          
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateProduct([FromForm] ProductDTO productDTO)
         {
+            
             var result = await _productService.CreateProduct(productDTO);
+           
             return Ok(result);
         }
 
