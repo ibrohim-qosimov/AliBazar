@@ -1,4 +1,5 @@
 using AliBazar.Application;
+using AliBazar.Application.Exceptions;
 using AliBazar.Infrastructure;
 namespace AliBazar.API;
 
@@ -26,14 +27,6 @@ public class Program
         builder.Services.AddControllers();
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
-
-        builder.Services.AddTransient<GlobalExceptionHandlerMiddlware>();
-
-
-
-
-
-
 
         var app = builder.Build();
 
