@@ -1,6 +1,6 @@
 ﻿namespace AliBazar.Domain.Entities;
-public class ProductColor
-{
+    public class ProductColor
+    {
     public long Id { get; set; }
     public string Color { get; set; }
 

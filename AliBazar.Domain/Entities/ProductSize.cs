@@ -1,6 +1,6 @@
 ﻿namespace AliBazar.Domain.Entities;
-public class ProductSize
-{
+    public class ProductSize
+    {
     public long Id { get; set; }
     public string Size { get; set; }
 
