@@ -1,7 +1,6 @@
 ﻿using AliBazar.Application.ViewModels;
 using AliBazar.Domain.Entities;
 using AliBazar.Domain.ViewModels;
-using System.Xml.Linq;
 
 namespace AliBazar.Application.Services.CategoryServices
 {

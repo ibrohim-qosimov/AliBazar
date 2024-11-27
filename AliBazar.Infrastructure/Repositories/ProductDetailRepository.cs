@@ -4,10 +4,9 @@ using AliBazar.Infrastructure.Persistance;
 
 namespace AliBazar.Infrastructure.Repositories
 {
-    public class CommentRepository : BaseRepository<Comment>, ICommentRepository
+    public class ProductDetailRepository : BaseRepository<ProductDetail>, IProductDetailRepository
     {
-        public CommentRepository(AliBazarDbContext context)
-            : base(context)
+        public ProductDetailRepository(AliBazarDbContext context) : base(context)
         {
         }
     }

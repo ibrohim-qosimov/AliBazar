@@ -1,6 +1,5 @@
 ﻿using AliBazar.Application.Services.CommentServices;
 using AliBazar.Application.ViewModels;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AliBazar.API.Controllers
@@ -52,7 +51,7 @@ namespace AliBazar.API.Controllers
             return Ok(result);
         }
 
-        
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> RemoveComment(long id)
         {

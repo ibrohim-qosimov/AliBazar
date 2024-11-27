@@ -16,12 +16,19 @@ public static class AliBazarInfrastructureDependencyInjection
             db.UseNpgsql(configuration.GetConnectionString("Db"));
         });
 
+
+
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<ICateogryRepository, CateogryRepository>();
         services.AddScoped<IOrderRepository, OrderRepository>();
         services.AddScoped<IProductRepository, ProductRepository>();
         services.AddScoped<IOrderItemRepository, OrderItemRepository>();
         services.AddScoped<ICommentRepository, CommentRepository>();
+        services.AddScoped<IProductSizeRepository, ProductSizeRepository>();
+        services.AddScoped<IProductDetailRepository, ProductDetailRepository>();
+        services.AddScoped<IProductColorRepository, ProductColorRepository>();
+
+
         return services;
     }
 }

@@ -1,7 +1,5 @@
-﻿using AliBazar.Application.Services.CategoryServices;
-using AliBazar.Application.Services.ProductServices;
+﻿using AliBazar.Application.Services.ProductServices;
 using AliBazar.Application.ViewModels;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AliBazar.API.Controllers

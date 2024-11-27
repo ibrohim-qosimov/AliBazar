@@ -4,7 +4,6 @@ using AliBazar.Domain.Entities;
 using AliBazar.Domain.ViewModels;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using System.Diagnostics;
 
 namespace AliBazar.Application.Services.CategoryServices
 {
@@ -107,7 +106,7 @@ namespace AliBazar.Application.Services.CategoryServices
 
             return new CategoryViewModel()
             {
-                Id= categoryResult.Id,
+                Id = categoryResult.Id,
                 Name = categoryResult.NameRuss,
                 ImageUrl = categoryResult.ImageUrl
             };

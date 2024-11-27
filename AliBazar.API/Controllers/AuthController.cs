@@ -3,7 +3,6 @@ using AliBazar.Application.Services.PasswrodHashing;
 using AliBazar.Application.Services.UserServices;
 using AliBazar.Application.ViewModels;
 using AliBazar.Domain.DTOs;
-using AliBazar.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AliBazar.API.Controllers

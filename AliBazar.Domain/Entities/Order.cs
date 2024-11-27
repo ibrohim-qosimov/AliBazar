@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace AliBazar.Domain.Entities
+﻿namespace AliBazar.Domain.Entities
 {
     public class Order
     {

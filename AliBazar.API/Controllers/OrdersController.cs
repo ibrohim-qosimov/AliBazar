@@ -1,6 +1,5 @@
 ﻿using AliBazar.Application.Services.OrderServices;
 using AliBazar.Application.ViewModels;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AliBazar.API.Controllers
@@ -17,7 +16,7 @@ namespace AliBazar.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostOrder( OrderCreteDTO categoryDTO)
+        public async Task<IActionResult> PostOrder(OrderCreteDTO categoryDTO)
         {
             var result = await _orderService.CreateOrder(categoryDTO);
             return Ok(result);

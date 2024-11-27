@@ -1,5 +1,5 @@
-using AliBazar.Infrastructure;
 using AliBazar.Application;
+using AliBazar.Infrastructure;
 namespace AliBazar.API;
 
 public class Program

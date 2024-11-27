@@ -2,11 +2,10 @@
 using AliBazar.Infrastructure.Persistance;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
-using System;
 
 namespace AliBazar.Infrastructure.Repositories
 {
-    public class BaseRepository<T>(AliBazarDbContext context) : IBaseRepository<T> 
+    public class BaseRepository<T>(AliBazarDbContext context) : IBaseRepository<T>
         where T : class
     {
         private readonly AliBazarDbContext _context = context;

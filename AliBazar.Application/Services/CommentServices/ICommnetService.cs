@@ -1,11 +1,6 @@
 ﻿using AliBazar.Application.ViewModels;
 using AliBazar.Domain.Entities;
 using AliBazar.Domain.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AliBazar.Application.Services.CommentServices
 {

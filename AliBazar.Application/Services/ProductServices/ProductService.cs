@@ -4,7 +4,6 @@ using AliBazar.Domain.Entities;
 using AliBazar.Domain.ViewModels;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using System.Diagnostics;
 
 namespace AliBazar.Application.Services.ProductServices
 {
@@ -95,7 +94,7 @@ namespace AliBazar.Application.Services.ProductServices
 
         public async Task<IEnumerable<ProductViewModel>> GetAllUz()
         {
-         
+
             var products = await _productRepository.GetAll();
             var result = products.Select(c => new ProductViewModel
             {
@@ -104,7 +103,7 @@ namespace AliBazar.Application.Services.ProductServices
                 Description = c.DescriptionUz,
                 Price = c.Price,
                 ImageUrl = c.ImageUrl
-            }); 
+            });
             return result;
         }
 
@@ -204,8 +203,8 @@ namespace AliBazar.Application.Services.ProductServices
                 ImageUrl = product.ImageUrl
             };
         }
-        
-        
+
+
 
         public async Task<ProductViewModel> GetProductByIdRu(long id)
         {
@@ -251,7 +250,7 @@ namespace AliBazar.Application.Services.ProductServices
         {
             var result = await _productRepository.GetAll();
 
-            var filteredResult = result.Where(c=>c.NameUz.Contains(name) || c.NameRuss.Contains(name));
+            var filteredResult = result.Where(c => c.NameUz.Contains(name) || c.NameRuss.Contains(name));
 
             return filteredResult;
         }

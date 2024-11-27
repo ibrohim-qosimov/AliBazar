@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace AliBazar.Domain.DTOs;
+﻿namespace AliBazar.Domain.DTOs;
 
 public class LoginDTO
 {
