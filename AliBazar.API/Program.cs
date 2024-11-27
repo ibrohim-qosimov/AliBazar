@@ -39,7 +39,7 @@ public class Program
             app.UseSwaggerUI();
         }
         //s
-        app.UseMiddleware<GlobalExceptionHandlerMiddlware>();
+        //app.UseMiddleware<GlobalExceptionHandlerMiddlware>();
         app.UseHttpsRedirection();
 
         app.UseCors();
@@ -47,8 +47,6 @@ public class Program
         app.UseStaticFiles();
 
         app.UseAuthorization();
-
-
 
         app.MapControllers();
 
