@@ -13,8 +13,7 @@ public static class AliBazarInfrastructureDependencyInjection
     {
         services.AddDbContext<AliBazarDbContext>(db =>
         {
-            db.UseNpgsql(configuration.GetConnectionString("Db"))
-                .UseLazyLoadingProxies();
+            db.UseNpgsql(configuration.GetConnectionString("Db"));
         });
 
 
