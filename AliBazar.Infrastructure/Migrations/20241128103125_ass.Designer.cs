@@ -13,8 +13,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace AliBazar.Infrastructure.Migrations
 {
     [DbContext(typeof(AliBazarDbContext))]
-    [Migration("20241128072327_sssss")]
-    partial class sssss
+    [Migration("20241128103125_ass")]
+    partial class ass
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
