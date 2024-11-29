@@ -18,14 +18,14 @@ namespace AliBazar.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateAdmin(Admin Admin)
+        public async Task<IActionResult> CreateAdmin(AdminDTO Admin)
         {
             var result = await _AdminService.CreateAdmin(Admin);
             return Ok(result);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateAdmin(long id, [FromForm] Admin Admin)
+        public async Task<IActionResult> UpdateAdmin(long id, [FromBody] AdminDTO Admin)
         {
             var result = await _AdminService.UpdateAdminById(id, Admin);
             return Ok(result);

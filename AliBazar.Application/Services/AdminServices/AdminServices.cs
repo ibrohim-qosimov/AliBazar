@@ -1,4 +1,5 @@
 ﻿using AliBazar.Application.Abstractions;
+using AliBazar.Application.ViewModels;
 using AliBazar.Domain.Entities;
 using AliBazar.Domain.ViewModels;
 
@@ -12,7 +13,7 @@ namespace AliBazar.Application.Services.AdminServices
         {
             _adminRepository = adminRepository;
         }
-        public async Task<ResponseModel> CreateAdmin(Admin Admin)
+        public async Task<ResponseModel> CreateAdmin(AdminDTO Admin)
         {
             var admin = new Admin
             {
@@ -61,7 +62,7 @@ namespace AliBazar.Application.Services.AdminServices
             return await _adminRepository.GetAll();
         }
 
-        public async Task<ResponseModel> UpdateAdminById(long id, Admin Admin)
+        public async Task<ResponseModel> UpdateAdminById(long id, AdminDTO Admin)
         {
             var admin = await _adminRepository.GetByAny(x => x.Id == id);
             

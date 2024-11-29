@@ -1,4 +1,5 @@
-﻿using AliBazar.Application.Services.CategoryServices;
+﻿using AliBazar.Application.Services.AdminServices;
+using AliBazar.Application.Services.CategoryServices;
 using AliBazar.Application.Services.CommentServices;
 using AliBazar.Application.Services.GeneratingJWT;
 using AliBazar.Application.Services.OrderServices;
@@ -16,6 +17,7 @@ namespace AliBazar.Application
     {
         public static IServiceCollection AddAliBazarApplicationDependencyInjection(this IServiceCollection services)
         {
+            services.AddScoped<IAdminServices, AdminServices>();
             services.AddScoped<IPasswordHasher, PasswordHasher>();
             services.AddScoped<IJwtService, JwtService>();
             services.AddScoped<ICategoryService, CategoryService>();

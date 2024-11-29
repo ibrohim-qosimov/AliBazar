@@ -27,6 +27,7 @@ public static class AliBazarInfrastructureDependencyInjection
         services.AddScoped<IProductSizeRepository, ProductSizeRepository>();
         services.AddScoped<IProductDetailRepository, ProductDetailRepository>();
         services.AddScoped<IProductColorRepository, ProductColorRepository>();
+        services.AddScoped<IAdminRepository, AdminRepository>();
 
 
         return services;
