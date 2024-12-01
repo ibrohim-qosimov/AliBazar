@@ -1,9 +1,11 @@
 ﻿using AliBazar.Application.Abstractions;
 using AliBazar.Application.ViewModels;
 using AliBazar.Domain.Entities;
+using AliBazar.Domain.Exceptions;
 using AliBazar.Domain.ViewModels;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 
 namespace AliBazar.Application.Services.ProductServices
@@ -203,6 +205,9 @@ namespace AliBazar.Application.Services.ProductServices
                    x => x.ProductDetail.ProductColors,
                        x => x.ProductDetail.ProductSizes);
 
+            if (product == null)
+                throw new NotFoundException("Product not found!");
+
             var result = new ProductViewModel()
             {
                 Id = product.Id,
@@ -228,6 +233,9 @@ namespace AliBazar.Application.Services.ProductServices
                 x => x.ProductDetail,
                     x => x.ProductDetail.ProductColors,
                         x => x.ProductDetail.ProductSizes);
+
+            if (product == null)
+                throw new NotFoundException("Product not found!");
 
             var result = new ProductViewModel()
             {
