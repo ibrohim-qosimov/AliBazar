@@ -8,6 +8,7 @@ public class Product
     public string? DescriptionUz { get; set; }
     public string? DescriptionRuss { get; set; }
     public required decimal Price { get; set; }
+    public required decimal PreviousPrice { get; set; }
     public required long CategoryId { get; set; }
     public bool IsDeleted { get; set; } = false;
 

@@ -50,6 +50,7 @@ namespace AliBazar.Application.Services.ProductServices
                 NameUz = productDTO.NameUz,
                 DescriptionUz = productDTO.DescriptionUz,
                 DescriptionRuss = productDTO.DescriptionRuss,
+                PreviousPrice = productDTO.PreviousPrice,
                 Price = productDTO.Price,
                 CategoryId = productDTO.CategoryId,
                 ImageUrl = imageUrls
@@ -102,6 +103,7 @@ namespace AliBazar.Application.Services.ProductServices
                 Id = c.Id,
                 Name = c.NameUz,
                 Description = c.DescriptionUz,
+                PreviousPrice = c.PreviousPrice,
                 Price = c.Price,
                 ImageUrl = c.ImageUrl
             });
@@ -117,6 +119,7 @@ namespace AliBazar.Application.Services.ProductServices
                 Id = c.Id,
                 Name = c.NameRuss,
                 Description = c.DescriptionRuss,
+                PreviousPrice = c.PreviousPrice,
                 Price = c.Price,
                 ImageUrl = c.ImageUrl
             });
@@ -170,6 +173,7 @@ namespace AliBazar.Application.Services.ProductServices
             product.DescriptionUz = productDTO.DescriptionUz;
             product.DescriptionRuss = productDTO.DescriptionRuss;
             product.Price = productDTO.Price;
+            product.PreviousPrice = productDTO.PreviousPrice;
             product.CategoryId = productDTO.CategoryId;
 
             var result = await _productRepository.Update(product);
@@ -204,6 +208,7 @@ namespace AliBazar.Application.Services.ProductServices
                 Id = product.Id,
                 Name = product.NameUz,
                 Description = product.DescriptionUz,
+                PreviousPrice = product.PreviousPrice,
                 Price = product.Price,
                 ImageUrl = product.ImageUrl,
                 ProductDetails = product.ProductDetail
@@ -229,6 +234,7 @@ namespace AliBazar.Application.Services.ProductServices
                 Id = product.Id,
                 Name = product.NameRuss,
                 Description = product.DescriptionRuss,
+                PreviousPrice = product.PreviousPrice,
                 Price = product.Price,
                 ImageUrl = product.ImageUrl,
                 ProductDetails = product.ProductDetail
