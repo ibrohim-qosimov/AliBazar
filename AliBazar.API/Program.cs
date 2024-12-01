@@ -1,6 +1,7 @@
 using AliBazar.Application;
 using AliBazar.Application.Exceptions;
 using AliBazar.Infrastructure;
+using System.Text.Json.Serialization;
 namespace AliBazar.API;
 
 public class Program
@@ -24,7 +25,10 @@ public class Program
 
 
 
-        builder.Services.AddControllers();
+        builder.Services.AddControllers().AddJsonOptions(options =>
+        {
+            options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+        }); ;
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 

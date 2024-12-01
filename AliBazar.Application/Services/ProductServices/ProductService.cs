@@ -4,6 +4,7 @@ using AliBazar.Domain.Entities;
 using AliBazar.Domain.ViewModels;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 
 namespace AliBazar.Application.Services.ProductServices
 {
@@ -123,6 +124,7 @@ namespace AliBazar.Application.Services.ProductServices
             return result;
         }
 
+
         public async Task<ResponseModel> UpdateProductById(long id, ProductDTO productDTO)
         {
             var product = await _productRepository.GetByAny(x => x.Id == id);
@@ -192,32 +194,50 @@ namespace AliBazar.Application.Services.ProductServices
         public async Task<ProductViewModel> GetProductByIdUz(long id)
         {
 
-            var product = await _productRepository.GetByAny(x => x.Id == id);
+            var product = await _productRepository.GetByAny(x => x.Id == id,
+               x => x.ProductDetail,
+                   x => x.ProductDetail.ProductColors,
+                       x => x.ProductDetail.ProductSizes);
 
-            return new ProductViewModel()
+            var result = new ProductViewModel()
             {
                 Id = product.Id,
                 Name = product.NameUz,
                 Description = product.DescriptionUz,
                 Price = product.Price,
-                ImageUrl = product.ImageUrl
+                ImageUrl = product.ImageUrl,
+                ProductDetails = product.ProductDetail
             };
+
+            result.ProductDetails.ProductSizes = product.ProductDetail.ProductSizes;
+            result.ProductDetails.ProductColors = product.ProductDetail.ProductColors;
+            return result;
+
         }
 
 
 
         public async Task<ProductViewModel> GetProductByIdRu(long id)
         {
-            var product = await _productRepository.GetByAny(x => x.Id == id);
+            var product = await _productRepository.GetByAny(x => x.Id == id,
+                x => x.ProductDetail,
+                    x => x.ProductDetail.ProductColors,
+                        x => x.ProductDetail.ProductSizes);
 
-            return new ProductViewModel()
+            var result = new ProductViewModel()
             {
                 Id = product.Id,
                 Name = product.NameRuss,
                 Description = product.DescriptionRuss,
                 Price = product.Price,
-                ImageUrl = product.ImageUrl
+                ImageUrl = product.ImageUrl,
+                ProductDetails = product.ProductDetail
             };
+
+            result.ProductDetails.ProductSizes = product.ProductDetail.ProductSizes;
+            result.ProductDetails.ProductColors = product.ProductDetail.ProductColors;
+
+            return result;
         }
 
         private async Task<string> SaveFileAsync(IFormFile file, string productFolderPath)
@@ -251,6 +271,24 @@ namespace AliBazar.Application.Services.ProductServices
             var result = await _productRepository.GetAll();
 
             var filteredResult = result.Where(c => c.NameUz.Contains(name) || c.NameRuss.Contains(name));
+
+            return filteredResult;
+        }
+
+        public async Task<IEnumerable<Product>> SearchProductRuss(string name)
+        {
+            var result = await _productRepository.GetAll();
+
+            var filteredResult = result.Where(c => c.NameRuss.Contains(name));
+
+            return filteredResult;
+        }
+
+        public async Task<IEnumerable<Product>> SearchProductUz(string name)
+        {
+            var result = await _productRepository.GetAll();
+
+            var filteredResult = result.Where(c => c.NameUz.Contains(name));
 
             return filteredResult;
         }

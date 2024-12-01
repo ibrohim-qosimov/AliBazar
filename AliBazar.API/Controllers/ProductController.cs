@@ -1,5 +1,6 @@
 ﻿using AliBazar.Application.Services.ProductServices;
 using AliBazar.Application.ViewModels;
+using AliBazar.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 
@@ -108,6 +109,24 @@ namespace AliBazar.API.Controllers
         public async Task<IActionResult> SearchProduct([FromQuery] string name)
         {
             var result = await _productService.SearchProduct(name);
+            return Ok(result);
+        }
+
+        [HttpGet("search/byLanguage")]
+        public async Task<IActionResult> SearchProductByLanguage([FromQuery] string name, [FromHeader(Name = "Accept-Language")] string language = "uz")
+        {
+            IEnumerable<Product> result;
+            switch (language)
+            {
+                case "uz":
+                    result = await _productService.SearchProductUz(name);
+                    break;
+                case "ru":
+                    result = await _productService.SearchProductRuss(name);
+                    break;
+                default:
+                    throw new Exception("Language not found");
+            }
             return Ok(result);
         }
     }

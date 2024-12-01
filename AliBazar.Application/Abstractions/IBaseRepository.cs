@@ -9,4 +9,7 @@ public interface IBaseRepository<T> where T : class
     public Task<IEnumerable<T>> GetAll();
     public Task<bool> Delete(Expression<Func<T, bool>> expression);
     public Task<T> Update(T entity);
+
+    public IQueryable<T> GetAllForInclude();
+    public Task<T> GetByAny(Expression<Func<T, bool>> expression, params Expression<Func<T, object>>[] includes);
 }

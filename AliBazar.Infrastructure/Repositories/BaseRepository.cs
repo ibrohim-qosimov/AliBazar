@@ -36,6 +36,12 @@ namespace AliBazar.Infrastructure.Repositories
             return await _dbSet.ToListAsync();
         }
 
+
+        public IQueryable<T> GetAllForInclude()
+        {
+            return _context.Set<T>();
+        }
+
         public async Task<T> GetByAny(Expression<Func<T, bool>> expression)
         {
             try
@@ -48,6 +54,24 @@ namespace AliBazar.Infrastructure.Repositories
                 throw;
             }
         }
+
+        public async Task<T> GetByAny(Expression<Func<T, bool>> expression, params Expression<Func<T, object>>[] includes)
+        {
+            IQueryable<T> query = _dbSet;
+
+            if (includes != null)
+            {
+                foreach (var include in includes)
+                {
+                    query = query.Include(include);
+                }
+            }
+
+            var res = await query.FirstOrDefaultAsync(expression);
+            return res ?? throw new Exception("Entity not found.");
+        }
+
+
 
         public async Task<T> Update(T entity)
         {
