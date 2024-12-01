@@ -216,13 +216,24 @@ namespace AliBazar.Application.Services.ProductServices
                 PreviousPrice = product.PreviousPrice,
                 Price = product.Price,
                 ImageUrl = product.ImageUrl,
-                ProductDetails = product.ProductDetail
+                ProductDetails = product.ProductDetail ?? null
             };
 
-            result.ProductDetails.ProductSizes = product.ProductDetail.ProductSizes;
-            result.ProductDetails.ProductColors = product.ProductDetail.ProductColors;
-            return result;
+            if (product.ProductDetail is not null)
+            {
+                if (product.ProductDetail.ProductSizes == null)
+                    result.ProductDetails.ProductSizes = new List<ProductSize>();
 
+                else
+                    result.ProductDetails.ProductSizes = product.ProductDetail.ProductSizes;
+
+                if (product.ProductDetail.ProductColors == null)
+                    result.ProductDetails.ProductColors = new List<ProductColor>();
+                else
+                    result.ProductDetails.ProductColors = product.ProductDetail.ProductColors;
+            }
+
+            return result;
         }
 
 
@@ -245,11 +256,22 @@ namespace AliBazar.Application.Services.ProductServices
                 PreviousPrice = product.PreviousPrice,
                 Price = product.Price,
                 ImageUrl = product.ImageUrl,
-                ProductDetails = product.ProductDetail
+                ProductDetails = product.ProductDetail ?? null
             };
 
-            result.ProductDetails.ProductSizes = product.ProductDetail.ProductSizes;
-            result.ProductDetails.ProductColors = product.ProductDetail.ProductColors;
+            if (product.ProductDetail is not null)
+            {
+                if (product.ProductDetail.ProductSizes == null)
+                    result.ProductDetails.ProductSizes = new List<ProductSize>();
+
+                else
+                    result.ProductDetails.ProductSizes = product.ProductDetail.ProductSizes;
+
+                if (product.ProductDetail.ProductColors == null)
+                    result.ProductDetails.ProductColors = new List<ProductColor>();
+                else
+                    result.ProductDetails.ProductColors = product.ProductDetail.ProductColors;
+            }
 
             return result;
         }

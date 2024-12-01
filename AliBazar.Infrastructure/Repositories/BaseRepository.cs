@@ -1,4 +1,5 @@
 ﻿using AliBazar.Application.Abstractions;
+using AliBazar.Domain.Exceptions;
 using AliBazar.Infrastructure.Persistance;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
@@ -68,7 +69,7 @@ namespace AliBazar.Infrastructure.Repositories
             }
 
             var res = await query.FirstOrDefaultAsync(expression);
-            return res ?? throw new Exception("Entity not found.");
+            return res ?? throw new NotFoundException("Entity not found.");
         }
 
 
