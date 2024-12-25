@@ -2,7 +2,7 @@
 
 namespace AliBazar.Application.ViewModels
 {
-    public class CategoryDTO
+    public class CategoryDTO 
     {
         public required string NameUz { get; set; }
         public required string NameRuss { get; set; }
