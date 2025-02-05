@@ -17,10 +17,6 @@ namespace AliBazar.API.Controllers
             _productService = productService;
         }
 
-
-
-
-
         [HttpPost]
         public async Task<IActionResult> CreateProductColor(ProductColorDTO color)
         {
@@ -28,7 +24,7 @@ namespace AliBazar.API.Controllers
             return Ok(result);
         }
 
-        [HttpDelete("id")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProductColor(int id)
         {
             var result = await _productService.DeleteProductColor(id);
@@ -49,16 +45,11 @@ namespace AliBazar.API.Controllers
             return Ok(result);
         }
 
-        [HttpGet("id")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetByIdProductColor(int id)
         {
             var result = await _productService.GetProductColorById(id);
             return Ok(result);
         }
-
-
-
-
-
     }
 }

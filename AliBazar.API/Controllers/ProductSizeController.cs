@@ -27,7 +27,7 @@ namespace AliBazar.API.Controllers
             return Ok(result);
         }
 
-        [HttpDelete("id")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProductSize(int id)
         {
             var result = await _productSize.DeleteProductSize(id);
@@ -48,24 +48,11 @@ namespace AliBazar.API.Controllers
             return Ok(result);
         }
 
-        [HttpGet("id")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetByIdProductSize(int id)
         {
             var result = await _productSize.GetProductSizeById(id);
             return Ok(result);
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }
