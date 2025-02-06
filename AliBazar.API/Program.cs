@@ -1,6 +1,7 @@
 using AliBazar.Application;
 using AliBazar.Application.Exceptions;
 using AliBazar.Infrastructure;
+using Messager.EskizUz;
 using System.Text.Json.Serialization;
 namespace AliBazar.API;
 
@@ -28,7 +29,16 @@ public class Program
         builder.Services.AddControllers().AddJsonOptions(options =>
         {
             options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
-        }); ;
+        });
+
+        builder.Services.AddScoped<MessagerAgent>(provider =>
+        {
+            var email = builder.Configuration.GetSection("MessangerAgentSettings").GetValue<string>("Email")!;
+            var key = builder.Configuration.GetSection("MessangerAgentSettings").GetValue<string>("Key")!;
+            return new MessagerAgent(email, key);
+        });
+
+
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
