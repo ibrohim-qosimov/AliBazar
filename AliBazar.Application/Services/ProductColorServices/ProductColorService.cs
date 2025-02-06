@@ -29,8 +29,9 @@ namespace AliBazar.Application.Services.ProductColorServices
 
             var product = new ProductColor()
             {
-              Color=color.Color,
-              ProductDetailId=color.ProductDetailId
+              ColorUz=color.ColorUz,
+              ColorRu=color.ColorRu,
+                ProductDetailId =color.ProductDetailId
             };
 
             var result = await _repository.Create(product);
@@ -93,7 +94,8 @@ namespace AliBazar.Application.Services.ProductColorServices
 
 
 
-            productColor.Color = color.Color;
+            productColor.ColorUz = color.ColorUz;
+            productColor.ColorRu = color.ColorRu;
             productColor.ProductDetailId=color.ProductDetailId;
 
             var result = await _repository.Update(productColor);
