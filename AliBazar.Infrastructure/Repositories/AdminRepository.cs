@@ -1,6 +1,6 @@
-﻿using AliBazar.Domain.Entities;
+﻿using AliBazar.Application.Abstractions;
+using AliBazar.Domain.Entities;
 using AliBazar.Infrastructure.Persistance;
-using AliBazar.Application.Abstractions;
 
 namespace AliBazar.Infrastructure.Repositories
 {

@@ -1,5 +1,4 @@
 using AliBazar.Application;
-using AliBazar.Application.Exceptions;
 using AliBazar.Infrastructure;
 using Messager.EskizUz;
 using System.Text.Json.Serialization;
