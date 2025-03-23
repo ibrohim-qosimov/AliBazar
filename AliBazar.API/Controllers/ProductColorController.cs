@@ -1,6 +1,5 @@
 ﻿using AliBazar.Application.Services.ProductColorServices;
 using AliBazar.Domain.DTOs;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AliBazar.API.Controllers

@@ -1,7 +1,5 @@
 ﻿using AliBazar.Application.Services.ProductDetailsServices;
 using AliBazar.Application.ViewModels;
-using AliBazar.Domain.DTOs;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AliBazar.API.Controllers

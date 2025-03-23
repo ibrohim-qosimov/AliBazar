@@ -1,5 +1,4 @@
 ﻿using Messager.EskizUz;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AliBazar.API.Controllers

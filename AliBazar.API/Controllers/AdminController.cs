@@ -1,6 +1,5 @@
 ﻿using AliBazar.Application.Services.AdminServices;
 using AliBazar.Application.ViewModels;
-using AliBazar.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AliBazar.API.Controllers

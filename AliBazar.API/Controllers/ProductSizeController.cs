@@ -1,6 +1,5 @@
 ﻿using AliBazar.Application.Services.ProductSizeServices;
 using AliBazar.Application.ViewModels;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AliBazar.API.Controllers
