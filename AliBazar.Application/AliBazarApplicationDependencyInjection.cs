@@ -28,6 +28,7 @@ namespace AliBazar.Application
             services.AddScoped<IProductColorService, ProductColorService>();
             services.AddScoped<IProductDetailService, ProductDetailService>();
             services.AddScoped<IProductSizeService, ProductSizeService>();
+
             return services;
         }
     }

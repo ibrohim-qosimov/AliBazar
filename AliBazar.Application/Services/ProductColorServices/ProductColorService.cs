@@ -1,14 +1,8 @@
 ﻿using AliBazar.Application.Abstractions;
-using AliBazar.Application.ViewModels;
 using AliBazar.Domain.DTOs;
 
 using AliBazar.Domain.Entities;
 using AliBazar.Domain.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AliBazar.Application.Services.ProductColorServices
 {
@@ -25,19 +19,19 @@ namespace AliBazar.Application.Services.ProductColorServices
 
         public async Task<ResponseModel> CreateProductColor(ProductColorDTO color)
         {
-            
+
 
             var product = new ProductColor()
             {
-              ColorUz=color.ColorUz,
-              ColorRu=color.ColorRu,
-                ProductDetailId =color.ProductDetailId
+                ColorUz = color.ColorUz,
+                ColorRu = color.ColorRu,
+                ProductDetailId = color.ProductDetailId
             };
 
             var result = await _repository.Create(product);
 
-           
-            if(result == null)
+
+            if (result == null)
             {
                 return new ResponseModel()
                 {
@@ -55,25 +49,25 @@ namespace AliBazar.Application.Services.ProductColorServices
 
         public async Task<bool> DeleteProductColor(int id)
         {
-           
-            var color = await _repository.Delete(x=>x.Id == id);
+
+            var color = await _repository.Delete(x => x.Id == id);
 
             return true;
-            
+
 
         }
 
         public async Task<IEnumerable<ProductColor>> GetAllProductColor()
         {
             return await _repository.GetAll();
-            
+
         }
 
         public async Task<ProductColor> GetProductColorById(int id)
         {
-           var result = await _repository.GetByAny(x=>x.Id == id);
+            var result = await _repository.GetByAny(x => x.Id == id);
             return result;
-            
+
         }
 
         public async Task<ResponseModel> UpdateProducColor(int id, ProductColorDTO color)
@@ -96,11 +90,11 @@ namespace AliBazar.Application.Services.ProductColorServices
 
             productColor.ColorUz = color.ColorUz;
             productColor.ColorRu = color.ColorRu;
-            productColor.ProductDetailId=color.ProductDetailId;
+            productColor.ProductDetailId = color.ProductDetailId;
 
             var result = await _repository.Update(productColor);
 
-           
+
 
             return new ResponseModel()
             {

@@ -2,12 +2,6 @@
 using AliBazar.Application.ViewModels;
 using AliBazar.Domain.Entities;
 using AliBazar.Domain.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AliBazar.Application.Services.ProductDetailsServices
 {
@@ -25,12 +19,12 @@ namespace AliBazar.Application.Services.ProductDetailsServices
         {
             var product = new ProductDetail()
             {
-               ThisWeekPurchases = detail.ThisWeekPurchases,
-               StockCount = detail.StockCount,
-               ProductId = detail.ProductId,
+                ThisWeekPurchases = detail.ThisWeekPurchases,
+                StockCount = detail.StockCount,
+                ProductId = detail.ProductId,
             };
 
-            var result = await  _repositiry.Create(product);
+            var result = await _repositiry.Create(product);
 
 
             if (result == null)

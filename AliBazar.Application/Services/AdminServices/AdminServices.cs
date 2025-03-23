@@ -37,7 +37,7 @@ namespace AliBazar.Application.Services.AdminServices
                 IsSuccess = true
             };
         }
-       
+
 
         public async Task<bool> DeleteAdminById(long id)
         {
@@ -53,7 +53,7 @@ namespace AliBazar.Application.Services.AdminServices
 
         public async Task<Admin> GetAdminByPhoneNumber(string phoneNumber)
         {
-            var adminResult =  await _adminRepository.GetByAny(x=>x.PhoneNumber == phoneNumber);
+            var adminResult = await _adminRepository.GetByAny(x => x.PhoneNumber == phoneNumber);
             return adminResult;
         }
 
@@ -65,7 +65,7 @@ namespace AliBazar.Application.Services.AdminServices
         public async Task<ResponseModel> UpdateAdminById(long id, AdminDTO Admin)
         {
             var admin = await _adminRepository.GetByAny(x => x.Id == id);
-            
+
             if (admin == null)
             {
                 return new ResponseModel()
@@ -78,7 +78,7 @@ namespace AliBazar.Application.Services.AdminServices
             admin.PhoneNumber = Admin.PhoneNumber;
 
             var result = await _adminRepository.Update(admin);
-            
+
             return new ResponseModel()
             {
                 Note = "Admin updated successfully!",

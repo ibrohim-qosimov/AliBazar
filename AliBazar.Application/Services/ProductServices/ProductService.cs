@@ -5,8 +5,6 @@ using AliBazar.Domain.Exceptions;
 using AliBazar.Domain.ViewModels;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.EntityFrameworkCore;
 
 namespace AliBazar.Application.Services.ProductServices
 {

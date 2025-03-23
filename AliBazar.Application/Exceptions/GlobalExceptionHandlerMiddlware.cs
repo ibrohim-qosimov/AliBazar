@@ -1,13 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace AliBazar.Application.Exceptions
 {
@@ -28,9 +23,10 @@ namespace AliBazar.Application.Exceptions
 
                 await next(context);
 
-            }catch (Exception ex)
+            }
+            catch (Exception ex)
             {
-                _logger.LogError(ex , ex.Message);
+                _logger.LogError(ex, ex.Message);
 
                 context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
@@ -46,7 +42,7 @@ namespace AliBazar.Application.Exceptions
                 string json = JsonSerializer.Serialize(problem);
 
                 context.Response.ContentType = "application/json";
-                await context.Response.WriteAsync(json);    
+                await context.Response.WriteAsync(json);
 
 
 

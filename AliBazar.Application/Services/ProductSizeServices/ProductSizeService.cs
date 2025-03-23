@@ -2,12 +2,6 @@
 using AliBazar.Application.ViewModels;
 using AliBazar.Domain.Entities;
 using AliBazar.Domain.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AliBazar.Application.Services.ProductSizeServices
 {
@@ -25,8 +19,8 @@ namespace AliBazar.Application.Services.ProductSizeServices
         {
             var product = new ProductSize()
             {
-               Size = detail.Size,
-               ProductDetailId = detail.ProductDetailId
+                Size = detail.Size,
+                ProductDetailId = detail.ProductDetailId
             };
 
             var result = await _repository.Create(product);
